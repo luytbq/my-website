@@ -1,0 +1,1 @@
+rsync ./index.html -P root@luytbq.online:/usr/share/nginx/luytbq.online/home/
