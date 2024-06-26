@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        /* dark mode */
+        @media (prefers-color-scheme: dark) {
+            body, textarea {
+                background-color: #999;
+                color: yellow;
+            }
+        }
+        pre {
+            display: inline;
+        }
+
+        #ta-original,
+        #ta-modified {
+            min-height: 300px;
+            /* width: 40%; */
+        }
+
+        .half-width {
+            width: 49%;
+        }
+        .diff {
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="inputs">
+        <textarea name="original" id="ta-original" class="half-width"></textarea>
+        <textarea name="modified" id="ta-modified" class="half-width"></textarea>
+    </div>
+    <div class="actions">
+        <button id="btn-compare">Compare</button>
+    </div>
+    <div class="output">
+        <table id="tb-output" style="width:100%; display: flex">
+            <!-- <colgroup></colgroup> -->
+        </table>
+    </div>
+    <script src="./text-compare.js"></script>
+
+    <script>
+        const taOriginalText = document.getElementById('ta-original');
+        const taModifiedText = document.getElementById('ta-modified');
+        const btnCompare = document.getElementById('btn-compare');
+        function startCompare() {
+            const outputEl = document.getElementById('tb-output');
+            outputEl.innerHTML = '';
+            // const delim = '\n';
+            const delim = '';
+
+            console.log(taOriginalText.value || '', taModifiedText.value || '');
+            let res = compareChars(taOriginalText.value || '', taModifiedText.value || '', delim);
+
+            const div1 = document.createElement('div');
+            div1.classList.add('half-width');
+            const div2 = document.createElement('div');
+            div2.classList.add('half-width');
+            // const pre1 = document.createElement('pre');
+            let arr1 = (taOriginalText.value || '').split(delim);
+            let arr2 = (taModifiedText.value || '').split(delim);
+
+            // const connect = delim == '\n'? 
+            for (let i = 0; i < arr1.length; i++) {
+                let pre = document.createElement('pre');
+                console.log(pre);
+                pre.innerHTML = arr1[i];
+                if (!res.s1[i]) {
+                    pre.classList.add('diff')
+                }
+
+                div1.appendChild(pre)
+            }
+
+            for (let i = 0; i < arr2.length; i++) {
+                let pre = document.createElement('pre');
+                console.log(pre);
+                pre.innerHTML = arr2[i];
+                if (!res.s2[i]) {
+                    pre.classList.add('diff')
+                }
+
+                div2.appendChild(pre)
+            }
+
+            outputEl.appendChild(div1);
+            outputEl.appendChild(div2);
+
+            console.log(res);
+        }
+        btnCompare.addEventListener('click', () => startCompare());
+
+    </script>
+    
+</body>
+</html>
