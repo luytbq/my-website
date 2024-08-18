@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pomodoro Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+</head>
+<body>
+    <div class="container">
+        <div class="timer">
+            <div class="time">
+                <span id="minutes">25</span>:<span id="seconds">00</span>
+            </div>
+            <div class="settings">
+                <div class="work">
+                    <h3>Work</h3>
+                    <button id="work-minus" onclick="decreaseWorkTime()">-</button>
+                    <span id="work-time">25</span>
+                    <button id="work-plus" onclick="increaseWorkTime()">+</button>
+                </div>
+                <div class="break">
+                    <h3>Break</h3>
+                    <button id="break-minus">-</button>
+                    <span id="break-time">5</span>
+                    <button id="break-plus">+</button>
+                </div>
+            </div>
+            <div class="buttons">
+                <button id="start-work" onclick="startWork()">Start work</button>
+                <button id="start-break" onclick="startBreak()">Start break</button>
+                <button id="pause" onclick="pauseTimer()">Pause</button>
+                <button id="reset" onclick="reset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</html>
